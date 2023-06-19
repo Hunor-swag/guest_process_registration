@@ -1,6 +1,6 @@
 "use client";
 
-import { FocusEvent, FormEvent, useState } from "react";
+import { FocusEvent, FormEvent, useRef, useState } from "react";
 import useDictionary from "@/hooks/useDictionary";
 import Link from "next/link";
 import {
@@ -14,6 +14,7 @@ import {
   validateSecondPassword,
 } from "@/functions/validations";
 import Input from "./Input";
+import ErrorDialog from "@/components/ErrorDialog";
 
 export default function RegisterSystem() {
   const defaultObject = { value: "", error: "" };
@@ -30,6 +31,8 @@ export default function RegisterSystem() {
 
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+
+  const errorDialogRef = useRef<HTMLDialogElement>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -62,11 +65,12 @@ export default function RegisterSystem() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) {
+      errorDialogRef.current?.showModal();
       console.log("must fill all fields");
       return;
     }
-    // resetForm();
-    // setShowSuccessDialog(true);
+    resetForm();
+    setShowSuccessDialog(true);
     await fetch(`https://register.putboot.dev/api/systems`, {
       method: "POST",
       body: JSON.stringify({
@@ -276,6 +280,7 @@ export default function RegisterSystem() {
           </div>
         </form>
       </div>
+      <ErrorDialog dialogRef={errorDialogRef} />
     </div>
   );
 }
