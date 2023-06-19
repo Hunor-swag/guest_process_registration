@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "title": "Felhő Asztal"
+  },
+  "auth": {
+    "signIn": {
+      "signInTitle": "Bejelentkezés",
+      "withEmail": "Email címmel",
+      "email": "Email",
+      "password": "Jelszó",
+      "forgotPassword": "Elfelejtett jelszó ?",
+      "signIn": "Belépés",
+      "notAMemberYet": "Nincs még regisztrálva ?",
+      "signUp": "Regisztráció"
+    },
+    "signUp": {
+      "signUpTitle": "Regisztráció",
+      "withEmail": "Email címmel",
+      "email": "Email",
+      "password": "Jelszó",
+      "repeatPassword": "Jelszó megerősítése",
+      "passwordText": "Használjon legalább 8 karaktert, egy számot, egy kisbetűt, egy nagybetűt és egy különleges karaktert.",
+      "terms": "Elfogadom a ",
+      "termsLink": "Felhasználási feltételeket",
+      "signUp": "Regisztráció",
+      "alreadyAMember": "Már van fiókja ?",
+      "signIn": "Belépés"
+    },
+    "validationTexts": {
+      "emailRequired": "Email cím megadása kötelező",
+      "emailInvalid": "Email cím formátuma nem megfelelő",
+      "passwordRequired": "Jelszó megadása kötelező",
+      "passwordInvalid": "Jelszó formátuma nem megfelelő",
+      "passwordsDontMatch": "A két jelszó nem egyezik",
+      "requiredField": "Ez a mező kitöltése kötelező"
+    }
+  },
+
+  "links": {
+    "terms": "Felhasználási feltételek",
+    "plans": "Tervek",
+    "contact": "Kapcsolat"
+  },
+  "userSidebar": {
+    "profile": "Profil",
+    "guests": "Vendégek"
+  },
+  "userHeader": {
+    "home": "Kezdőlap",
+    "guests": "Vendégek",
+    "about": "Rólunk",
+    "contact": "Kapcsolat",
+    "myProfile": "Profilom",
+    "signOut": "Kijelentkezés"
+  },
+  "userProfile": {
+    "profileDetails": "Profil adatok",
+    "fullName": "Teljes név",
+    "phoneNumber": "Telefonszám",
+    "address": "Cím"
+  },
+  "registerSystem": {
+    "title1": "Felhő Asztal",
+    "title2": "Regisztráció",
+    "restaurantName": "Étterem neve*",
+    "restaurantNameSubLabel": "* Regisztráció után több éttermet is rögzíthet a rendszerben",
+    "personName": "Az Ön neve",
+    "email": "Kapcsolattartó E-mail címe",
+    "phoneNumber": "Kapcsolattartó telefonszáma",
+    "password": "Jelszó",
+    "passwordConfirmation": "Jelszó megerősítése",
+    "submitButtonText": "Regisztrálok",
+    "termsAndConditions1": "Megértettem és elfogadom a ",
+    "termsAndConditionsLink": " Felhasználói Szerződésben",
+    "termsAndConditions2": " foglaltakat!",
+    "privacyPolicies1": "Megértettem és elfogadom az ",
+    "privacyPoliciesLink": "Adatvédelmi irányelvekben",
+    "privacyPolicies2": " foglaltakat!",
+    "privacyPolicies3": "Az Előfizető kijelenti, hogy az Adatvédelmi Irányelvekben foglaltakat elolvasta és megértette, amelyre tekintettel az adatkezeléshez önkéntesen és kifejezetten hozzájárul."
+  }
+}

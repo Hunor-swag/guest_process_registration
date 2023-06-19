@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "title": "Cloud Table"
+  },
+  "auth": {
+    "signIn": {
+      "signInTitle": "Sign In",
+      "withEmail": "With email",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot Password ?",
+      "signIn": "Sign In",
+      "notAMemberYet": "Not a member yet ?",
+      "signUp": "Sign Up"
+    },
+    "signUp": {
+      "signUpTitle": "Sign Up",
+      "withEmail": "With email",
+      "email": "Email",
+      "password": "Password",
+      "repeatPassword": "Repeat Password",
+      "passwordText": "Use 8 or more characters with a mix of lowercase letters, uppercase letters, numbers & symbols.",
+      "terms": "I Accept the ",
+      "termsLink": "Terms and Conditions",
+      "signUp": "Sign Up",
+      "alreadyAMember": "Already have an account ?",
+      "signIn": "Sign In"
+    },
+    "validationTexts": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "passwordRequired": "Password is required",
+      "passwordInvalid": "Invalid password",
+      "passwordsDontMatch": "Passwords don't match",
+      "requiredField": "This field is required"
+    }
+  },
+
+  "links": {
+    "terms": "Terms",
+    "plans": "Plans",
+    "contact": "Contact Us"
+  },
+  "userSidebar": {
+    "profile": "Profile",
+    "guests": "Guests"
+  },
+  "userHeader": {
+    "home": "Home",
+    "guests": "Guests",
+    "about": "About",
+    "contact": "Contact",
+    "myProfile": "My Profile",
+    "signOut": "Sign Out"
+  },
+  "userProfile": {
+    "profileDetails": "Profile details",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "address": "Address"
+  },
+  "registerSystem": {
+    "title1": "Cloud Table",
+    "title2": "Registration",
+    "restaurantName": "Restaurant name*",
+    "restaurantNameSubLabel": "* After registration, you can record several restaurants in the system",
+    "personName": "Your name",
+    "email": "Contact E-mail",
+    "phoneNumber": "Contact phone number",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation",
+    "submitButtonText": "Register",
+    "termsAndConditions1": "I accept the ",
+    "termsAndConditionsLink": "Terms and Conditions",
+    "termsAndConditions2": "",
+    "privacyPolicies1": "I accept the ",
+    "privacyPoliciesLink": "Privacy Policies",
+    "privacyPolicies2": "",
+    "privacyPolicies3": "The Subscriber declares that she/he has read and understood the Privacy Policies, in view of which she/he voluntarily and expressly consents to data management."
+  }
+}
