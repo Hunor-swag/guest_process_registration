@@ -50,3 +50,14 @@ export function displayErrorToast(message: string) {
     type: "error",
   });
 }
+export function displaySuccessToast(message: string) {
+  toast(message, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: false,
+    type: "success",
+  });
+}

@@ -16,10 +16,17 @@ import {
 import Input from "./Input";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { displayErrorToast, displayToasts } from "@/functions/displayToasts";
+import {
+  displayErrorToast,
+  displaySuccessToast,
+  displayToasts,
+} from "@/functions/displayToasts";
+import { useRouter } from "next/navigation";
 // import ErrorDialog from "@/components/ErrorDialog";
 
 export default function RegisterSystem() {
+  const router = useRouter();
+
   const defaultObject = { value: "", error: "" };
   const [values, setValues] = useState({
     hotel_name: defaultObject,
@@ -80,6 +87,7 @@ export default function RegisterSystem() {
       });
       return;
     }
+    displaySuccessToast("System registered successfully!");
     resetForm();
     setShowSuccessDialog(true);
 
@@ -107,6 +115,8 @@ export default function RegisterSystem() {
       displayErrorToast("Something went wrong!");
       return;
     }
+
+    router.push(`https://${processed_hotel_name}.putboot.dev/auth/sign-in`);
   };
 
   const resetForm = () => {
