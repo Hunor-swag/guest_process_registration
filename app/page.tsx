@@ -14,7 +14,10 @@ import {
   validateSecondPassword,
 } from "@/functions/validations";
 import Input from "./Input";
-import ErrorDialog from "@/components/ErrorDialog";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { displayErrorToast, displayToasts } from "@/functions/displayToasts";
+// import ErrorDialog from "@/components/ErrorDialog";
 
 export default function RegisterSystem() {
   const defaultObject = { value: "", error: "" };
@@ -22,7 +25,7 @@ export default function RegisterSystem() {
     hotel_name: defaultObject,
     contact_name: defaultObject,
     email: defaultObject,
-    phone: defaultObject,
+    contact_phone: defaultObject,
     password: defaultObject,
     password_confirmation: defaultObject,
     terms: { value: false, error: "" },
@@ -50,7 +53,7 @@ export default function RegisterSystem() {
     return (
       isValidEmail(values.email.value) &&
       isValid(values.hotel_name.value) &&
-      isValid(values.phone.value) &&
+      isValid(values.contact_phone.value) &&
       isValid(values.contact_name.value) &&
       isValidPassword(values.password.value) &&
       passwordsMatch(
@@ -65,32 +68,45 @@ export default function RegisterSystem() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) {
-      errorDialogRef.current?.showModal();
-      console.log("must fill all fields");
+      displayToasts({
+        email: values.email.value,
+        hotel_name: values.hotel_name.value,
+        contact_phone: values.contact_phone.value,
+        contact_name: values.contact_name.value,
+        password: values.password.value,
+        password_confirmation: values.password_confirmation.value,
+        terms: values.terms.value,
+        privacy_policies: values.privacy_policies.value,
+      });
       return;
     }
-    // resetForm();
-    // setShowSuccessDialog(true);
+    resetForm();
+    setShowSuccessDialog(true);
 
     const processed_hotel_name = values.hotel_name.value
       .trim()
       .toLowerCase()
       .replaceAll(" ", "_");
 
-    console.log(process.env.NEXT_PUBLIC_API_URL);
-
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/systems`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/systems`, {
       method: "POST",
       body: JSON.stringify({
         subdomain: processed_hotel_name,
         hotel_name: values.hotel_name.value.trim(),
         contact_name: values.contact_name.value,
         contact_email: values.email.value,
-        contact_phone: values.phone.value,
+        contact_phone: values.contact_phone.value,
         password: values.password.value,
       }),
     });
-    console.log("done");
+
+    if (res.status === 409) {
+      displayErrorToast("Database already exists!");
+      return;
+    } else if (res.status >= 400) {
+      displayErrorToast("Something went wrong!");
+      return;
+    }
   };
 
   const resetForm = () => {
@@ -98,7 +114,7 @@ export default function RegisterSystem() {
       hotel_name: defaultObject,
       contact_name: defaultObject,
       email: defaultObject,
-      phone: defaultObject,
+      contact_phone: defaultObject,
       password: defaultObject,
       password_confirmation: defaultObject,
       terms: { value: false, error: "" },
@@ -180,13 +196,13 @@ export default function RegisterSystem() {
             <Input
               type="text"
               label={dict.registerSystem.phoneNumber}
-              errorMessage={values.phone.error}
-              value={values.phone.value}
-              onChange={(e) => handleInputChange(e, "phone")}
+              errorMessage={values.contact_phone.error}
+              value={values.contact_phone.value}
+              onChange={(e) => handleInputChange(e, "contact_phone")}
               onBlur={(e) =>
                 setErrorMessage(
                   e,
-                  "phone",
+                  "contact_phone",
                   validateRequiredField(
                     e.target.value,
                     dict.auth.validationTexts
@@ -289,7 +305,11 @@ export default function RegisterSystem() {
           </div>
         </form>
       </div>
-      <ErrorDialog dialogRef={errorDialogRef} />
+      {/* <ErrorDialog dialogRef={errorDialogRef} /> */}
+      <ToastContainer
+        className="flex flex-col items-end"
+        toastClassName="w-56 h-fit"
+      />
     </div>
   );
 }

@@ -28,8 +28,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    console.log("1");
-
     const {
       hotel_name,
       subdomain,
@@ -39,33 +37,54 @@ export async function POST(req: NextRequest) {
       password,
     } = await req.json();
 
-    console.log("2");
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    console.log("2.5");
-    console.log(
-      hotel_name,
-      subdomain,
-      contact_name,
-      contact_email,
-      contact_phone,
-      hashedPassword
-    );
-    console.log("3");
+    // console.log(
+    //   hotel_name,
+    //   subdomain,
+    //   contact_name,
+    //   contact_email,
+    //   contact_phone,
+    //   hashedPassword
+    // );
+
+    // Check if the database already exists
+
+    const checkIfDatabaseExistsQueryString = `
+      SELECT SCHEMA_NAME
+        FROM INFORMATION_SCHEMA.SCHEMATA
+        WHERE SCHEMA_NAME = '${subdomain}'
+    `;
+
+    const checkIfDatabaseExistsResults = (await query(
+      "control_panel",
+      checkIfDatabaseExistsQueryString,
+      []
+    )) as [];
+
+    if (checkIfDatabaseExistsResults.length > 0) {
+      return new NextResponse(
+        JSON.stringify({
+          status: "fail",
+          message: "Database already exists, please give a different name",
+        }),
+        {
+          status: 409,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
 
     // Create new database for the hotel system
 
     const createDatabaseQueryString = `
       CREATE DATABASE IF NOT EXISTS ${subdomain};
     `;
-    console.log("4");
 
     await query("control_panel", createDatabaseQueryString, []);
 
-    console.log("5");
     // Insert new hotel system data into control panel database
 
-    console.log("6");
     const insertNewHotelIntoControlPanelString = `
       INSERT INTO hotel_systems (name, subdomain, contact_name, contact_email, contact_phone) VALUES (?, ?, ?, ?, ?);
     `;
@@ -126,7 +145,6 @@ export async function POST(req: NextRequest) {
       status: "error",
       message: error.message,
     };
-    console.log(error_response);
     return new NextResponse(JSON.stringify(error_response), {
       status: 500,
       headers: { "Content-Type": "application/json" },
