@@ -62,8 +62,8 @@
   "registerSystem": {
     "title1": "Felhő Asztal",
     "title2": "Regisztráció",
-    "restaurantName": "Étterem neve*",
-    "restaurantNameSubLabel": "* Regisztráció után több éttermet is rögzíthet a rendszerben",
+    "hotelName": "Szálloda neve*",
+    "hotelNameSubLabel": "* Regisztráció után több szállodát is rögzíthet a rendszerben",
     "personName": "Az Ön neve",
     "email": "Kapcsolattartó E-mail címe",
     "phoneNumber": "Kapcsolattartó telefonszáma",

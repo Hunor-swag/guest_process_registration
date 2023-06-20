@@ -62,8 +62,8 @@
   "registerSystem": {
     "title1": "Cloud Table",
     "title2": "Registration",
-    "restaurantName": "Restaurant name*",
-    "restaurantNameSubLabel": "* After registration, you can record several restaurants in the system",
+    "hotelName": "Hotel name*",
+    "hotelNameSubLabel": "* After registration, you can record several hotels in the system",
     "personName": "Your name",
     "email": "Contact E-mail",
     "phoneNumber": "Contact phone number",

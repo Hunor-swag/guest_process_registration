@@ -7,11 +7,11 @@ type Props = {
 };
 
 function ErrorDialog({ dialogRef }: Props) {
-  useEffect(() => {
-    if (dialogRef.current) {
-      dialogRef.current.showModal();
-    }
-  }, [dialogRef]);
+  // useEffect(() => {
+  //   if (dialogRef.current) {
+  //     dialogRef.current.showModal();
+  //   }
+  // }, [dialogRef]);
 
   return (
     <dialog open={false} ref={dialogRef} className="rounded-lg p-12">

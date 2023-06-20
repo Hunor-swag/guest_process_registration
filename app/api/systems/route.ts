@@ -28,21 +28,57 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { hotel_name, person_name, contact_email, contact_phone, password } =
-      await req.json();
+    console.log("1");
 
+    const {
+      hotel_name,
+      subdomain,
+      contact_name,
+      contact_email,
+      contact_phone,
+      password,
+    } = await req.json();
+
+    console.log("2");
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    console.log("2.5");
     console.log(
       hotel_name,
-      person_name,
+      subdomain,
+      contact_name,
       contact_email,
       contact_phone,
       hashedPassword
     );
+    console.log("3");
+
+    // Create new database for the hotel system
 
     const createDatabaseQueryString = `
-      CREATE DATABASE IF NOT EXISTS ${hotel_name};
+      CREATE DATABASE IF NOT EXISTS ${subdomain};
     `;
+    console.log("4");
+
+    await query("control_panel", createDatabaseQueryString, []);
+
+    console.log("5");
+    // Insert new hotel system data into control panel database
+
+    console.log("6");
+    const insertNewHotelIntoControlPanelString = `
+      INSERT INTO hotel_systems (name, subdomain, contact_name, contact_email, contact_phone) VALUES (?, ?, ?, ?, ?);
+    `;
+
+    await query("control_panel", insertNewHotelIntoControlPanelString, [
+      hotel_name,
+      subdomain,
+      contact_name,
+      contact_email,
+      contact_phone,
+    ]);
+
+    // create user table in the new hotels database
 
     const createTableQueryString = `
       CREATE TABLE IF NOT EXISTS users (
@@ -54,17 +90,17 @@ export async function POST(req: NextRequest) {
       );
     `;
 
+    await query(subdomain, createTableQueryString, []);
+
+    // Insert new user into the new hotels database
+
     const insertQueryString = `
       INSERT INTO users (name, email, phone_number, password)
       VALUES (?, ?, ?, ?);
     `;
 
-    await query("control_panel", createDatabaseQueryString, []);
-
-    await query(hotel_name, createTableQueryString, []);
-
-    const results = await query(hotel_name, insertQueryString, [
-      person_name,
+    const results = await query(subdomain, insertQueryString, [
+      contact_name,
       contact_email,
       contact_phone,
       hashedPassword,

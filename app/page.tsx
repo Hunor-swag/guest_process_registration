@@ -20,7 +20,7 @@ export default function RegisterSystem() {
   const defaultObject = { value: "", error: "" };
   const [values, setValues] = useState({
     hotel_name: defaultObject,
-    person_name: defaultObject,
+    contact_name: defaultObject,
     email: defaultObject,
     phone: defaultObject,
     password: defaultObject,
@@ -51,7 +51,7 @@ export default function RegisterSystem() {
       isValidEmail(values.email.value) &&
       isValid(values.hotel_name.value) &&
       isValid(values.phone.value) &&
-      isValid(values.person_name.value) &&
+      isValid(values.contact_name.value) &&
       isValidPassword(values.password.value) &&
       passwordsMatch(
         values.password.value,
@@ -69,13 +69,22 @@ export default function RegisterSystem() {
       console.log("must fill all fields");
       return;
     }
-    resetForm();
-    setShowSuccessDialog(true);
-    await fetch(`https://register.putboot.dev/api/systems`, {
+    // resetForm();
+    // setShowSuccessDialog(true);
+
+    const processed_hotel_name = values.hotel_name.value
+      .trim()
+      .toLowerCase()
+      .replaceAll(" ", "_");
+
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/systems`, {
       method: "POST",
       body: JSON.stringify({
-        hotel_name: values.hotel_name.value.toLowerCase(),
-        person_name: values.person_name.value,
+        subdomain: processed_hotel_name,
+        hotel_name: values.hotel_name.value.trim(),
+        contact_name: values.contact_name.value,
         contact_email: values.email.value,
         contact_phone: values.phone.value,
         password: values.password.value,
@@ -87,7 +96,7 @@ export default function RegisterSystem() {
   const resetForm = () => {
     setValues({
       hotel_name: defaultObject,
-      person_name: defaultObject,
+      contact_name: defaultObject,
       email: defaultObject,
       phone: defaultObject,
       password: defaultObject,
@@ -126,9 +135,9 @@ export default function RegisterSystem() {
         <form className="p-4" onSubmit={handleSubmit}>
           <Input
             type="text"
-            label={dict.registerSystem.restaurantName}
+            label={dict.registerSystem.hotelName}
             errorMessage={values.hotel_name.error}
-            subLabel={dict.registerSystem.restaurantNameSubLabel}
+            subLabel={dict.registerSystem.hotelNameSubLabel}
             value={values.hotel_name.value}
             onChange={(e) => handleInputChange(e, "hotel_name")}
             onBlur={(e) =>
@@ -142,13 +151,13 @@ export default function RegisterSystem() {
           <Input
             type="text"
             label={dict.registerSystem.personName}
-            errorMessage={values.person_name.error}
-            value={values.person_name.value}
-            onChange={(e) => handleInputChange(e, "person_name")}
+            errorMessage={values.contact_name.error}
+            value={values.contact_name.value}
+            onChange={(e) => handleInputChange(e, "contact_name")}
             onBlur={(e) =>
               setErrorMessage(
                 e,
-                "person_name",
+                "contact_name",
                 validateRequiredField(e.target.value, dict.auth.validationTexts)
               )
             }
