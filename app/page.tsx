@@ -17,7 +17,9 @@ import Input from "./Input";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  closeLoadingToast,
   displayErrorToast,
+  displayLoadingToast,
   displaySuccessToast,
   displayToasts,
 } from "@/functions/displayToasts";
@@ -87,8 +89,7 @@ export default function RegisterSystem() {
       });
       return;
     }
-    resetForm();
-    setShowSuccessDialog(true);
+    const loadingToastId = displayLoadingToast("Registering system...");
 
     const processed_hotel_name = values.hotel_name.value
       .trim()
@@ -114,9 +115,10 @@ export default function RegisterSystem() {
       displayErrorToast("Something went wrong!");
       return;
     }
-
+    closeLoadingToast(loadingToastId);
     displaySuccessToast("System registered successfully!");
 
+    resetForm();
     router.push(`https://${processed_hotel_name}.putboot.dev/auth/sign-in`);
   };
 
