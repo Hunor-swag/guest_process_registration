@@ -87,7 +87,6 @@ export default function RegisterSystem() {
       });
       return;
     }
-    displaySuccessToast("System registered successfully!");
     resetForm();
     setShowSuccessDialog(true);
 
@@ -115,6 +114,8 @@ export default function RegisterSystem() {
       displayErrorToast("Something went wrong!");
       return;
     }
+
+    displaySuccessToast("System registered successfully!");
 
     router.push(`https://${processed_hotel_name}.putboot.dev/auth/sign-in`);
   };
