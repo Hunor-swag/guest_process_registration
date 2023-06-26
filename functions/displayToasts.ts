@@ -4,7 +4,7 @@ import {
   isValidPassword,
   passwordsMatch,
 } from "./validations";
-import { toast } from "react-toastify";
+import { Id, ToastItem, toast } from "react-toastify";
 
 type Params = {
   email: string;
@@ -60,4 +60,20 @@ export function displaySuccessToast(message: string) {
     draggable: false,
     type: "success",
   });
+}
+
+export function displayLoadingToast(message: string) {
+  return toast(message, {
+    position: "top-right",
+    autoClose: false,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    type: "info",
+  });
+}
+
+export function closeLoadingToast(toastId: Id) {
+  toast.dismiss(toastId);
 }
