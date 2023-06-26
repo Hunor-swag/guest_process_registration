@@ -94,7 +94,7 @@ export default function RegisterSystem() {
     const processed_hotel_name = values.hotel_name.value
       .trim()
       .toLowerCase()
-      .replaceAll(" ", "_");
+      .replaceAll(" ", "-");
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/systems`, {
       method: "POST",

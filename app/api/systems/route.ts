@@ -37,6 +37,8 @@ export async function POST(req: NextRequest) {
       password,
     } = await req.json();
 
+    console.log(subdomain);
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // console.log(
