@@ -136,8 +136,9 @@ export async function POST(req: NextRequest) {
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         address VARCHAR(255) NOT NULL,
-        id_number VARCHAR(255) NOT NULL,
-    )`;
+        id_number VARCHAR(255) NOT NULL
+      );
+    `;
 
     await query(db_name, createGuestsTableQueryString, []);
 

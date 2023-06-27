@@ -119,6 +119,8 @@ export default function RegisterSystem() {
       return;
     } else if (res.status >= 400) {
       console.log(res.status, res.statusText);
+
+      closeLoadingToast(loadingToastId);
       displayErrorToast("Something went wrong!");
       return;
     }
