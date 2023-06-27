@@ -104,8 +104,8 @@ export default function RegisterSystem() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/systems`, {
       method: "POST",
       body: JSON.stringify({
+        hotel_name: values.hotel_name.value,
         subdomain: processed_hotel_name,
-        hotel_name: values.hotel_name,
         db_name: new_database_name,
         contact_name: values.contact_name.value,
         contact_email: values.email.value,
