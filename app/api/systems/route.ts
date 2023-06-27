@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
     const {
       hotel_name,
       subdomain,
+      db_name,
       contact_name,
       contact_email,
       contact_phone,
@@ -111,7 +112,7 @@ export async function POST(req: NextRequest) {
       );
     `;
 
-    await query(subdomain, createTableQueryString, []);
+    await query(db_name, createTableQueryString, []);
 
     // Insert new user into the new hotels database
 
@@ -120,7 +121,7 @@ export async function POST(req: NextRequest) {
       VALUES (?, ?, ?, ?);
     `;
 
-    const results = await query(subdomain, insertQueryString, [
+    const results = await query(db_name, insertQueryString, [
       contact_name,
       contact_email,
       contact_phone,
@@ -138,7 +139,7 @@ export async function POST(req: NextRequest) {
         id_number VARCHAR(255) NOT NULL,
     `;
 
-    await query(hotel_name, createGuestsTableQueryString, []);
+    await query(db_name, createGuestsTableQueryString, []);
 
     return new NextResponse(JSON.stringify(results), {
       status: 200,
