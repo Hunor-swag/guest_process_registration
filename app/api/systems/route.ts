@@ -127,6 +127,19 @@ export async function POST(req: NextRequest) {
       hashedPassword,
     ]);
 
+    // create guests table in the new hotels database
+
+    const createGuestsTableQueryString = `
+      CREATE TABLE IF NOT EXISTS guests (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        address VARCHAR(255) NOT NULL,
+        id_number VARCHAR(255) NOT NULL,
+    `;
+
+    await query(hotel_name, createGuestsTableQueryString, []);
+
     return new NextResponse(JSON.stringify(results), {
       status: 200,
       headers: { "Content-Type": "application/json" },

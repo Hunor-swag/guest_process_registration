@@ -91,6 +91,11 @@ export default function RegisterSystem() {
     }
     const loadingToastId = displayLoadingToast("Registering system...");
 
+    const new_database_name = values.hotel_name.value
+      .trim()
+      .toLowerCase()
+      .replaceAll(" ", "_");
+
     const processed_hotel_name = values.hotel_name.value
       .trim()
       .toLowerCase()
@@ -100,7 +105,7 @@ export default function RegisterSystem() {
       method: "POST",
       body: JSON.stringify({
         subdomain: processed_hotel_name,
-        hotel_name: values.hotel_name.value.trim(),
+        hotel_name: new_database_name,
         contact_name: values.contact_name.value,
         contact_email: values.email.value,
         contact_phone: values.contact_phone.value,
