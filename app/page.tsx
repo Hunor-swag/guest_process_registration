@@ -268,21 +268,24 @@ export default function RegisterSystem() {
             />
           </div>
           <div className="text-sm flex flex-col justify-center text-[#0099ff] font-semibold">
-            <div className="">
-              <input
-                type="checkbox"
-                className="m-5 focus:ring-0 focus:ring-offset-0 rounded-md"
-                checked={values.terms.value}
-                onChange={() =>
-                  setValues((prevValues) => ({
-                    ...prevValues,
-                    terms: {
-                      ...prevValues.terms,
-                      value: !prevValues.terms.value,
-                    },
-                  }))
-                }
-              />
+            <div className="flex items-center mb-3">
+              <div>
+                <input
+                  type="checkbox"
+                  className="m-5 focus:ring-0 focus:ring-offset-0 rounded-lg w-[20px] h-[20px]"
+                  checked={values.terms.value}
+                  onChange={() =>
+                    setValues((prevValues) => ({
+                      ...prevValues,
+                      terms: {
+                        ...prevValues.terms,
+                        value: !prevValues.terms.value,
+                      },
+                    }))
+                  }
+                />
+              </div>
+
               <span>
                 {dict.registerSystem.termsAndConditions1}
                 <Link href="#" className="underline font-bold">
@@ -290,10 +293,12 @@ export default function RegisterSystem() {
                 </Link>
                 {dict.registerSystem.termsAndConditions2}
               </span>
-              <div className="flex">
+            </div>
+            <div className="flex items-center">
+              <div>
                 <input
                   type="checkbox"
-                  className="m-5 focus:ring-0 focus:ring-offset-0 rounded-md"
+                  className="m-5 focus:ring-0 focus:ring-offset-0 rounded-lg w-[20px] h-[20px]"
                   checked={values.privacy_policies.value}
                   onChange={() =>
                     setValues((prevValues) => ({
@@ -305,18 +310,19 @@ export default function RegisterSystem() {
                     }))
                   }
                 />
-                <div>
-                  <p>
-                    {dict.registerSystem.privacyPolicies1}
-                    <Link href="#" className="underline font-bold">
-                      {dict.registerSystem.privacyPoliciesLink}
-                    </Link>
-                    {dict.registerSystem.privacyPolicies2}
-                  </p>
-                  <p className="text-black">
-                    {dict.registerSystem.privacyPolicies3}
-                  </p>
-                </div>
+              </div>
+
+              <div>
+                <p>
+                  {dict.registerSystem.privacyPolicies1}
+                  <Link href="#" className="underline font-bold">
+                    {dict.registerSystem.privacyPoliciesLink}
+                  </Link>
+                  {dict.registerSystem.privacyPolicies2}
+                </p>
+                <p className="text-black">
+                  {dict.registerSystem.privacyPolicies3}
+                </p>
               </div>
             </div>
           </div>
