@@ -133,10 +133,13 @@ export async function POST(req: NextRequest) {
     const createGuestsTableQueryString = `
       CREATE TABLE IF NOT EXISTS guests (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        name VARCHAR(255) NOT NULL,
+        name VARCHAR(128) NOT NULL,
         email VARCHAR(255) NOT NULL,
-        address VARCHAR(255) NOT NULL,
-        id_number VARCHAR(255) NOT NULL,
+        country VARCHAR(64) NOT NULL,
+        postal_code VARCHAR(16) NOT NULL,
+        city VARCHAR(64) NOT NULL,
+        street VARCHAR(64) NOT NULL,
+        number VARCHAR(16) NOT NULL,
         hidden BOOLEAN NOT NULL DEFAULT false
       );
     `;
